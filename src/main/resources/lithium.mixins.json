@@ -1,16 +1,18 @@
 {
-  "package": "me.jellysquid.mods.lithium.mixin",
-  "required": true,
-  "compatibilityLevel": "JAVA_8",
-  "plugin": "me.jellysquid.mods.lithium.mixin.LithiumMixinPlugin",
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "client": [
-  ],
-  "mixins": [
-    "ai.goal.GoalSelectorMixin",
-    "ai.nearby_entity_tracking.LivingEntityMixin",
+    "package": "me.jellysquid.mods.lithium.mixin",
+    "required": true,
+    "compatibilityLevel": "JAVA_8",
+    "plugin": "me.jellysquid.mods.lithium.mixin.LithiumMixinPlugin",
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "client": [
+        "ai.nearby_entity_tracking.MixinClientWorld"
+    ],
+    "mixins": [
+        "ai.goal.GoalSelectorMixin",
+        "ai.nearby_entity_tracking.LivingEntityMixin",
+        "ai.nearby_entity_tracking.MixinServerWorld",
     "ai.nearby_entity_tracking.ServerWorldMixin",
     "ai.nearby_entity_tracking.WorldChunkMixin",
     "ai.nearby_entity_tracking.WorldMixin",
