@@ -9,4 +9,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "lithium-fabric"
+rootProject.name = "hopperoptimizations-lithium"
