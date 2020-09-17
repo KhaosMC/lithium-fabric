@@ -32,9 +32,8 @@ public class WorldChunkMixin {
             )
     )
     private void onEntityAdded(Entity entity, CallbackInfo ci) {
-        if (entity instanceof LivingEntity) {
-            EntityTrackerEngineProvider.getEntityTracker(this.world).onEntityAdded(entity.chunkX, entity.chunkY, entity.chunkZ, (LivingEntity) entity);
-        }
+        EntityTrackerEngineProvider.getEntityTracker(this.world).onEntityAdded(entity.chunkX, entity.chunkY, entity.chunkZ, entity);
+
     }
 
     @Inject(
@@ -45,8 +44,6 @@ public class WorldChunkMixin {
             )
     )
     private void onEntityRemoved(Entity entity, int section, CallbackInfo ci) {
-        if (entity instanceof LivingEntity) {
-            EntityTrackerEngineProvider.getEntityTracker(this.world).onEntityRemoved(this.pos.x, section, this.pos.z, (LivingEntity) entity);
-        }
+        EntityTrackerEngineProvider.getEntityTracker(this.world).onEntityRemoved(this.pos.x, section, this.pos.z, entity);
     }
 }
