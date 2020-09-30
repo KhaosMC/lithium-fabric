@@ -23,16 +23,13 @@ public class ServerWorldMixin {
     @Redirect(method = "unloadEntities", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;next()Ljava/lang/Object;"))
     private Object onEntityRemoved(Iterator<Entity> iterator) {
         Entity entity = iterator.next();
-        if (!(entity instanceof LivingEntity)) {
-            return entity;
-        }
 
         int chunkX = MathHelper.floor(entity.getX()) >> 4;
         int chunkY = MathHelper.clamp(MathHelper.floor(entity.getY()) >> 4, 0, 15);
         int chunkZ = MathHelper.floor(entity.getZ()) >> 4;
 
         EntityTrackerEngine tracker = EntityTrackerEngineProvider.getEntityTracker(this);
-        tracker.onEntityRemoved(chunkX, chunkY, chunkZ, (LivingEntity) entity);
+        tracker.onEntityRemoved(chunkX, chunkY, chunkZ, entity);
         return entity;
     }
 }
