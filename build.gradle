@@ -14,7 +14,7 @@ allprojects {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 
-    archivesBaseName = "${project.name}-fabric-mc${project.minecraft_version}"
+    archivesBaseName = "${project.archives_base_name}-mc${project.minecraft_version}"
 
     println(archivesBaseName)
     group = project.maven_group
