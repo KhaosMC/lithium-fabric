@@ -90,6 +90,6 @@ public class NearbyEntityTracker<T extends LivingEntity> implements NearbyEntity
 
     @Override
     public String toString() {
-        return super.toString() + " for entity class: " + this.clazz.getName() + ", in rangeSq: " + this.rangeSq + ", around entity: " + this.self.toString() + " with NBT: " + this.self.toTag(new CompoundTag());
+        return super.toString() + " for entity class: " + this.clazz.getName() + ", in rangeSq: " + this.rangeSq + ", around entity: " + this.self.toString() + " with NBT: " + this.self.writeNbt(new CompoundTag());
     }
 }

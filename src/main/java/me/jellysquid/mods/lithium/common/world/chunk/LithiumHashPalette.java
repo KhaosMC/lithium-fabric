@@ -150,7 +150,7 @@ public class LithiumHashPalette<T> implements Palette<T> {
     }
 
     @Override
-    public void fromTag(ListTag list) {
+    public void readNbt(ListTag list) {
         this.clear();
 
         for (int i = 0; i < list.size(); ++i) {
