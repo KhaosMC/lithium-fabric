@@ -30,7 +30,7 @@ public abstract class MixinLivingEntity extends Entity {
     @Override
     public void setPosition(double x, double y, double z) {
         if (this.getBlockX() != MathHelper.floor(x) || this.getBlockY() != MathHelper.floor(y) || this.getBlockZ() != MathHelper.floor(z)) {
-            lastClimbingUpdate = Long.MAX_VALUE;
+            this.lastClimbingUpdate = Long.MAX_VALUE;
         }
         super.setPosition(x, y, z);
     }
@@ -38,18 +38,18 @@ public abstract class MixinLivingEntity extends Entity {
     @Inject(method = "isClimbing", cancellable = true, at = @At("HEAD"))
     private void useCacheIsClimbing(CallbackInfoReturnable<Boolean> cir) {
         int blockY = this.getBlockY();
-        if (!world.isOutOfHeightLimit(blockY)) {
-            Chunk chunk = (Chunk) ((CollisionView) world).getChunkAsView(Pos.ChunkCoord.fromBlockCoord(this.getBlockX()), Pos.ChunkCoord.fromBlockCoord(this.getBlockZ()));
+        if (!this.world.isOutOfHeightLimit(blockY)) {
+            Chunk chunk = (Chunk) ((CollisionView) this.world).getChunkAsView(Pos.ChunkCoord.fromBlockCoord(this.getBlockX()), Pos.ChunkCoord.fromBlockCoord(this.getBlockZ()));
             if (chunk != null) {
-                SectionModCounter section = (SectionModCounter) chunk.getSectionArray()[Pos.SectionYIndex.fromBlockCoord(world, blockY)];
+                SectionModCounter section = (SectionModCounter) chunk.getSectionArray()[Pos.SectionYIndex.fromBlockCoord(this.world, blockY)];
 
                 if (!ChunkSection.isEmpty((ChunkSection) section)) {
-                    if (section.isUnchanged(lastClimbingUpdate)) {
-                        cir.setReturnValue(cachedClimbing);
+                    if (section.isUnchanged(this.lastClimbingUpdate)) {
+                        cir.setReturnValue(this.cachedClimbing);
                     }
-                    lastClimbingUpdate = section.getModCount();
+                    this.lastClimbingUpdate = section.getModCount();
                 } else {
-                    lastClimbingUpdate = Long.MAX_VALUE;
+                    this.lastClimbingUpdate = Long.MAX_VALUE;
                 }
             }
         }
@@ -57,6 +57,6 @@ public abstract class MixinLivingEntity extends Entity {
 
     @Inject(method = "isClimbing", at = @At("RETURN"))
     private void setCacheIsClimbing(CallbackInfoReturnable<Boolean> cir) {
-        cachedClimbing = cir.getReturnValueZ();
+        this.cachedClimbing = cir.getReturnValueZ();
     }
 }
