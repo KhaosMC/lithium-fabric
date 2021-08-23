@@ -93,7 +93,6 @@
     "chunk.serialization.PalettedContainerMixin",
     "collections.entity_filtering.TypeFilterableListMixin",
     "entity.cached_climbing_check.MixinLivingEntity",
-    "entity.cached_health.MixinLivingEntity",
     "entity.collisions.CollisionViewMixin",
     "entity.collisions.EntityMixin",
     "entity.collisions.EntityViewMixin",
